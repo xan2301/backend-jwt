@@ -40,9 +40,7 @@ public class SecurityConfig {
 
     @Bean
 
-    public UserDetailsService userDetailsService()
-
-    {
+    public UserDetailsService userDetailsService() {
         return username -> userRepo.findByEmail(username).orElseThrow(() ->
                 new UsernameNotFoundException("User with these email not found"));
 
@@ -66,13 +64,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
+        http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http
-                .authorizeRequests((autz) -> autz
+        http.authorizeRequests()
 
-                        .requestMatchers("/auth/login").permitAll()
-                        .anyRequest().authenticated()
-                );
+                .requestMatchers("/auth/login").permitAll()
+                .anyRequest().authenticated();
 
         return http.build();
     }

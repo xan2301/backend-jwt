@@ -3,7 +3,6 @@ package pl.wiktorowski.backendjwt.user;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +26,12 @@ public class UserApi {
 
                 new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
-        User principal = (User) authenticate.getPrincipal();
+        User user = (User) authenticate.getPrincipal();
+
+        System.out.println(user);
+
+
+
 
 
         return "";
