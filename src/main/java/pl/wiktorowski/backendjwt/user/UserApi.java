@@ -37,6 +37,7 @@ public class UserApi {
             String token = JWT.create()
                     .withSubject(user.getUsername())
                     .withIssuer("Przemo")
+                    .withClaim("isAdmin",true)
                     .sign(algorithm);
 
 

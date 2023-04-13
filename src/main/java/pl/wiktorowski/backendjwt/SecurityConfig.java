@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import pl.wiktorowski.backendjwt.user.User;
 import pl.wiktorowski.backendjwt.user.UserRepo;
 
@@ -22,10 +23,21 @@ import pl.wiktorowski.backendjwt.user.UserRepo;
 public class SecurityConfig {
 
     private UserRepo userRepo;
+    private JwtTokenFilter jwtTokenFilter;
 
-    public SecurityConfig(UserRepo userRepo) {
+    public SecurityConfig(UserRepo userRepo, JwtTokenFilter jwtTokenFilter) {
         this.userRepo = userRepo;
+        this.jwtTokenFilter = jwtTokenFilter;
     }
+
+
+
+
+
+
+
+
+
 
     // To refactor
 
@@ -71,6 +83,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/login").permitAll()
                 .anyRequest().authenticated();
 
+        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
