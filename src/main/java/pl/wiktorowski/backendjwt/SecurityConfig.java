@@ -45,8 +45,13 @@ public class SecurityConfig {
 
     public void savaUser() {
 
-        User user = new User("p.wiktorowski2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"));
-        userRepo.save(user);
+        User user1 = new User("p.wiktorowski2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"admin");
+        userRepo.save(user1);
+
+        User user2 = new User("anna@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"user");
+        userRepo.save(user2);
+
+
 
     }
 
@@ -54,7 +59,7 @@ public class SecurityConfig {
 
     public UserDetailsService userDetailsService() {
         return username -> userRepo.findByEmail(username).orElseThrow(() ->
-                new UsernameNotFoundException("User with these email not found"));
+                new UsernameNotFoundException("User with these email not found" + username));
 
     }
 
@@ -81,6 +86,8 @@ public class SecurityConfig {
         http.authorizeRequests()
 
                 .requestMatchers("/auth/login").permitAll()
+        //       .requestMatchers("/hello").hasRole("admin")
+
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
