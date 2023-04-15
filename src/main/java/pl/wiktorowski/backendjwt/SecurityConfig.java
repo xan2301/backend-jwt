@@ -45,10 +45,10 @@ public class SecurityConfig {
 
     public void savaUser() {
 
-        User user1 = new User("p.wiktorowski2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"admin");
+        User user1 = new User("p.wiktorowski2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"ROLE_USER");
         userRepo.save(user1);
 
-        User user2 = new User("anna@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"user");
+        User user2 = new User("anna@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"ROLE_ADMIN");
         userRepo.save(user2);
 
 
@@ -86,7 +86,7 @@ public class SecurityConfig {
         http.authorizeRequests()
 
                 .requestMatchers("/auth/login").permitAll()
-        //       .requestMatchers("/hello").hasRole("admin")
+                .requestMatchers("/hello").hasRole("ADMIN")
 
                 .anyRequest().authenticated();
 
