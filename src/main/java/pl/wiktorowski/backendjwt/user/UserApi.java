@@ -40,7 +40,7 @@ public class UserApi {
             String token = JWT.create()
                     .withSubject(user.getUsername())
                     .withIssuer("Przemo")
-                    .withClaim("role", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                    .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                     .sign(algorithm);
 
 
