@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BookApi {
 
-    @GetMapping
+    @GetMapping("/book")
     public List<Book> get(){
 
         List<Book> bookList = new ArrayList<>();
