@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 import pl.wiktorowski.backendjwt.user.User;
 import pl.wiktorowski.backendjwt.user.UserRepo;
 
@@ -31,26 +32,17 @@ public class SecurityConfig {
     }
 
 
-
-
-
-
-
-
-
-
     // To refactor
 
     @EventListener(ApplicationReadyEvent.class)
 
     public void savaUser() {
 
-        User user1 = new User("p.wiktorowski2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"ROLE_USER");
+        User user1 = new User("p.wiktorowski2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"), "ROLE_USER");
         userRepo.save(user1);
 
-        User user2 = new User("anna@gmail.com", getBcryptPasswordEncoder().encode("qwerty"),"ROLE_ADMIN");
+        User user2 = new User("anna@gmail.com", getBcryptPasswordEncoder().encode("qwerty"), "ROLE_ADMIN");
         userRepo.save(user2);
-
 
 
     }
@@ -82,12 +74,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests()
 
                 .requestMatchers("/auth/login").permitAll()
                 .requestMatchers("/hello").hasRole("ADMIN")
-
+                .requestMatchers("/api/books").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
