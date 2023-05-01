@@ -44,6 +44,9 @@ public class SecurityConfig {
         User user2 = new User("anna@gmail.com", getBcryptPasswordEncoder().encode("qwerty"), "ROLE_ADMIN");
         userRepo.save(user2);
 
+        User user3 = new User("anna2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"), "ROLE_USER");
+        userRepo.save(user3);
+
 
     }
 
