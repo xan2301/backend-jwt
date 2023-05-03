@@ -15,7 +15,7 @@ public class BookApi {
     public List<Book> get(){
 
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("In Search of Lost Time","In Search of Lost Time"));
+        bookList.add(new Book("In Search of Lost Time","Marcel Proust"));
         bookList.add(new Book("Don Quixote","Miguel de Cervantes"));
         bookList.add(new Book("Ulysses","James Joyce"));
         bookList.add(new Book("One Hundred Years of Solitude","One Hundred Years of Solitude"));
