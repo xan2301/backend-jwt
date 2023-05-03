@@ -44,9 +44,6 @@ public class SecurityConfig {
         User user2 = new User("anna@gmail.com", getBcryptPasswordEncoder().encode("qwerty"), "ROLE_ADMIN");
         userRepo.save(user2);
 
-        User user3 = new User("anna2@gmail.com", getBcryptPasswordEncoder().encode("qwerty"), "ROLE_USER");
-        userRepo.save(user3);
-
 
     }
 
@@ -82,8 +79,7 @@ public class SecurityConfig {
         http.authorizeRequests()
 
                 .requestMatchers("/auth/login").permitAll()
-                .requestMatchers("/hello").hasRole("ADMIN")
-                .requestMatchers("/api/books").hasRole("ADMIN")
+                .requestMatchers("/api/cars").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

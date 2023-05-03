@@ -1,4 +1,4 @@
-package pl.wiktorowski.backendjwt.produckt;
+package pl.wiktorowski.backendjwt.items;
 
 public class Book {
 
