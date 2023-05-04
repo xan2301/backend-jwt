@@ -18,7 +18,9 @@ public class CarApi {
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("Fiat", "Panda", 2010, "red"));
         carList.add(new Car("Skoda", "Fabia", 2020, "green"));
-        carList.add(new Car("BMW", "Panda", 2018, "blue"));
+        carList.add(new Car("BMW", "X6", 2018, "blue"));
+        carList.add(new Car("BMW", "X5", 2015, "white"));
+        carList.add(new Car("BMW", "Z4", 2022, "black"));
 
 
         return carList;
