@@ -21,6 +21,7 @@ public class BookApi {
         bookList.add(new Book("One Hundred Years of Solitude","One Hundred Years of Solitude"));
         bookList.add(new Book("The Great Gatsby","F. Scott Fitzgerald"));
         bookList.add(new Book(" Moby Dick","Herman Melville"));
+        bookList.add(new Book(" Fear of Flying","Erica Jong"));
 
 
         return bookList;
